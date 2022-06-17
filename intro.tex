@@ -1,0 +1,140 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{multirow}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage{multicol}
+
+\graphicspath{ {./images/} }
+\begin{document}
+\section{Introduction to microcontrollers:}
+\subsection{What are Microcontrollers:}
+In our modern world, we often interact with and use high-performance, reliable, and easy-to-use devices to fulfill our needs and desires.
+These devices often contain multiple smaller parts each with a specific task and purpose depending on the complexity of said desire.
+This implies that the underlying operating system of these devices must be sophisticated enough to coordinate between their parts.
+But most of us are not required to know these devices' hidden structures and operating systems.
+Everyone can interface with and control them with just a few button clicks to produce their desired output. This is the main motivation behind the invention of microcontrollers.
+Microcontrollers are small computers that govern a single, specific task inside a large system. Complicated systems with multiple tasks require more than one microcontroller.
+A microcontroller contains a CPU along with memory and programmable input/output peripherals.
+To further motivate the relevance of microcontrollers. Let us consider our project. We want to build a line follower. A robot that is programmed to follow a certain path.
+The path is drawn by placing a black tape on a white surface. A sensor of some kind must be used to detect the path on the surface. IR (infrared) sensors are commonly used in line followers.
+They work by radiating the surface with infrared light, then picking the reflected infrared light, and based on the intensity, the sensors decide whether the robot is on or off the path. The first requirement of a programmable robot is to have some kind of CPU to execute a series of instructions
+given to it in form of machine code (binary code). A timer is also needed to perform periodical tasks of the robot. For example, the sensors must send and receive the IR radiations periodically to keep the robot up to date with its surrounding environment.
+The signals received by the sensors is analog in nature. So we need an ADC (analog to digital converter) to digitize it. A memory to store the digitize signal so it can be used later by the robot to adjust its wheels speed and correct its direction along the path.
+The speed of such DC motor is controlled by a PWM signal. Hence we need a PWM circuit.
+As we can see to make this simple project work, we need several chips, which require a lot of space and can be expensive. A microcontroller commes with all this features integrated in a small, cheap chip.
+So by using a microcontroller, we significantlly reduce the size of our circuit.
+\subsection{Microcontrollers and Microprocessors comparison:}
+\subsubsection{Differences in architecture:}
+The driving purpose behind the birth of microcontrollers is the need in the embedded system industry for a compact, low manufacturing cost, and low power consumption chip equipped with memory, timers, I/O pins, and other peripherals.
+Since most of the embedded systems applications don't require huge computational power or fast reaction times: For example, all house appliances like ovens, microwaves, and washing machines require human-level reaction ( button clicks)  or a calculator that performs simple calculations like addition, subtraction, and multiplication with relatively small precisions.
+On the other hand, a modern, high-resolution laptop screen with millions of pixels definitely requires fast reaction times and high computational ability.
+For each frame, complex computations are performed on each pixel simultaneously (parallel computation using a graphic card), and the screen is updated 60 times per second (60 frames per second).
+Designing a hardware circuit to solve these problems is not optimal, and a microcontroller will be a perfect choice.\\
+Microcontrollers are intended to perform a specific, predefined task, which implies that microcontrollers are not created equal. Although they share the same main structural component ( All microcontrollers have CPU, Memory, I/O pins, and Timers),
+they differ in some elements like the number of I/O pins, memory size, and the number of timers a microcontroller have.
+These differences are based on the application's needs.\\
+On the other hand, microprocessors are meant to perform a wide range of tasks. The only circuits integrated into them are the arithmetic and logic circuit to perform complex computations and excutes instructions (inputed in binary code), and control circuit to control external peripherals like memory.
+Processors do not work in isolation, and additional peripherals need to be connected externaly to fulfill the project's needs .
+\subsubsection{Cost and performance:}
+Since microprocessors are the heart of sophisticated systems with huge range of capabilities (personal computers and smart phones), they are high performance and substantially faster than microcontrollers. Some applications need relatively simple computing capacities, while others require complex, robust computing power.
+As a results, many microprocessors are clocking speeds is in the GHz realm.\\
+Microcontrollers handles specific, simpler, and predicted tasks, and they are the heart of less complicated and small embedded systems, so they can operate with much slower speeds often in the realm of MHz.\\
+\subsubsection{Power consumption:}
+One of the main reasons why embedded systems use microcontrollers is their extremely low power consumption. Since a microcontrollers that perform a single, specific, and simple task require less speed, and therfore less power, and we can power it for long duration of time by just a small battery.
+Whereas microprocessors perform complicated computations need to be fast and powerful, therfore more power consumption, meaning they need to be powered by an external power supply.\\
+The following table summurize the major differences between microcontrollers and microprocessors.
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{0.5\linewidth}|p{0.5\linewidth}|}
+        \hline
+        \\[0.06em]
+        Microprocessors                                                                                        & Microcontrollers                                                                                                     \\
+        \\[0.06em]
+        \hline
+        \hline
+        \\[0.06em]
+        They are multipurpose chips with wide range of use cases                                               & They are dedicated to solve specific tasks                                                                           \\
+        \\[0.06em]
+        \hline
+        \\[0.06em]
+        They are directed toward big and complicated systems, so they are more expensive than microcontrollers & They are directed toward embedded systems, therefore they have low manufacturing cost.                               \\
+        \\[0.06em]
+        \hline
+        \\[0.06em]
+        Memory and I/O components is to be connected externaly .The circuit is therfore more complex           & Because of the integrated memory and I/O components, the circuit is less complex, which lead to a reduction in size. \\
+        \\[0.06em]
+        \hline
+        \\[0.06em]
+        Since microprocessors are faster, they consume more power than microcontrollers.                       & Due to their low speed performance, microcontrollers consume less power.
+        \\[0.06em]
+        \hline
+    \end{tabular}
+\end{table}
+\subsection{The Main Components of a Microcontroller:}
+\section*{Pulse Width Modulation:}
+Pulse width modulation (PWM for short) is a method of generating an analog signal through digital means.
+A timer generate a periodic rectangular wave of a specific amplitude and frequency.
+This signal switches between two states, 0V and maximum voltage (On and off pattern).
+This oscillation between on and off states simulates a voltage range between the maximum voltage and the 0 voltage.
+The value of the voltage is controlled by changing the portion of which the signal is high compared to the portion of which the signal is low.
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{cc}
+        \subfloat[caption]{\includegraphics[width=3in]{0}}  &
+        \subfloat[caption]{\includegraphics[width=3in]{25}}   \\
+        \subfloat[caption]{\includegraphics[width=3in]{50}} &
+        \subfloat[caption]{\includegraphics[width=3in]{75}}
+    \end{tabular}
+    \caption{Duty Cycle}
+\end{figure}
+\subsection{Realization principle:}
+Many electronic circuit (LED and electric motors) perceive the on and off signal generated by PWM circuit as the average value of the maximum and the manimum voltage of the signal.
+Let us consider a PWM signal $s(t)$, of period $T$, minimum value $s_{min}$, a maximum value $s_{max}$, and a duty cycle $D$. Then the average value of $s(t)$ is given by:
+\begin{align*}
+    \langle s(t)\rangle=\dfrac{1}{T}\int_{0}^Ts(t)dt
+\end{align*}
+$s(t)$ is a rectangular pulse, so:
+\begin{align*}
+    s(t)=\begin{cases}
+              & s_{max} \quad\text{if}\quad 0<T<DT \\
+              & s_{min} \quad\text{if}\quad DT<T<T
+         \end{cases}
+\end{align*}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=5in]{PWM}
+    \caption{caption}
+\end{figure}
+The expression becomes:
+\begin{align*}
+    \langle s(t)\rangle & = \dfrac{1}{T}\left(\int_{0}^{DT}s_{max}dt+\int_{DT}^{T}s_{min}dt\right) \\
+                        & =\dfrac{1}{T}\left(s_{max}TD+Ts_{min}(1-D)\right)                        \\
+                        & =s_{max}D+s_{min}(1-D)
+\end{align*}
+If $s_{min}=0$, then:
+\[
+    \langle s(t)\rangle=s_{max}D
+\]
+One easy way to generate a PWM signal is by using a triangular of a sawtooth signal and a comparator. Triangular signals can be generated using an electronic oscillator. (We will make a full analysis of this circuit later in this chapter.)\\ 
+Suppose we have a signal $f(t)$ and we have to modulate it with PWM. We compare the amplitude of $f(t)$ to the modulation signal at every time $t$. If the value of the former is less than the later, the PWM signal is high, otherwise it is low. This method is called the intersection method.\\
+The following figure illustrate depicte a PWM generated using a sawtooth signal as the modulation signal and the signal to be modulated (called the reference signal).\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=5in]{hh}
+    \caption{caption}
+\end{figure}
+This method is not limited to DC voltages, you can modulation any signal that is physically possible. 
+For example the following figure shows the modulation of a sine wave.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=5in]{hh}
+    \caption{caption}
+\end{figure}
+\end{document}
